@@ -183,16 +183,17 @@ main {
     color: var(--secondary-color);
 }
 
-/* Menu Section Styles */
+/* --- UPDATED MENU STYLES START HERE --- */
 .menu-section {
     background-color: var(--white-color);
+    padding-bottom: 2.5rem; /* Add some padding at the bottom */
 }
 
 .menu-slider-container {
     max-width: 600px;
     margin: auto;
     overflow: hidden;
-    position: relative;
+    position: relative; /* Crucial for positioning the buttons */
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
@@ -212,26 +213,63 @@ main {
     height: auto;
 }
 
+/* Remove margin from the container */
 .menu-controls {
-    margin-top: 1.5rem;
+    /* This container is now only for structure */
 }
 
-.menu-controls button {
-    background-color: var(--primary-color);
+/* New styles for the Previous/Next buttons */
+#prev-page, #next-page {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.45);
     color: var(--white-color);
     border: none;
-    padding: 0.8rem 1.5rem;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
     cursor: pointer;
-    font-size: 1rem;
-    margin: 0 0.5rem;
-    transition: background-color 0.3s;
-    border-radius: 5px;
-    font-family: var(--body-font);
+    z-index: 10;
+    transition: background-color 0.3s ease;
+    
+    /* Hide the original button text (Previous/Next) */
+    font-size: 0; 
+    
+    /* Use flexbox to center the new arrow icon */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.menu-controls button:hover {
-    background-color: #e55337;
+#prev-page:hover, #next-page:hover {
+    background-color: rgba(0, 0, 0, 0.7);
 }
+
+#prev-page {
+    left: 15px; /* Position on the left */
+}
+
+#next-page {
+    right: 15px; /* Position on the right */
+}
+
+/* Create the new arrow icons using pseudo-elements */
+#prev-page::before, #next-page::before {
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+#prev-page::before {
+    content: '‹';
+}
+
+#next-page::before {
+    content: '›';
+}
+/* --- UPDATED MENU STYLES END HERE --- */
+
 
 /* Info Section Styles */
 #info p {
@@ -348,5 +386,18 @@ footer {
 
     .menu-slider-container {
         max-width: 100%;
+    }
+
+    #prev-page, #next-page {
+        width: 40px;
+        height: 40px;
+    }
+
+    #prev-page {
+        left: 10px;
+    }
+    
+    #next-page {
+        right: 10px;
     }
 }
