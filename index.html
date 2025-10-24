@@ -1,159 +1,144 @@
-<!doctype html>
-<html lang="vi">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Thông báo - Hiếu</title>
-<style>
-  :root{
-    --bg: linear-gradient(90deg,#ff7a18,#af002d 50%,#4a00e0);
-    --text: #fff;
-    --height: 56px;
-    --shadow: 0 4px 18px rgba(0,0,0,.18);
-    --radius: 6px;
-    --gap: 12px;
-    --font-sz: 16px;
-  }
-
-  /* wrapper để không che nội dung khi fixed */
-  body{ margin:0; font-family: Inter, Roboto, "Helvetica Neue", Arial, sans-serif; padding-top: calc(var(--height) + 12px); }
-
-  /* banner */
-  .top-banner{
-    position: fixed;
-    left: 12px;
-    right: 12px;
-    top: 12px;
-    height: var(--height);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap: var(--gap);
-    padding: 0 12px;
-    border-radius: var(--radius);
-    background: var(--bg);
-    color: var(--text);
-    box-shadow: var(--shadow);
-    z-index: 9999;
-    overflow: hidden;
-    backdrop-filter: blur(6px);
-    animation: float 6s ease-in-out infinite;
-  }
-
-  /* văn bản cuộn nhẹ nếu dài */
-  .banner-text{
-    flex: 1 1 auto;
-    min-width: 0;
-    display:flex;
-    align-items:center;
-    gap: 10px;
-    font-size: var(--font-sz);
-    font-weight: 600;
-    letter-spacing: .2px;
-  }
-
-  .marquee{
-    display:inline-block;
-    white-space: nowrap;
-    will-change: transform;
-    animation: marquee 12s linear infinite;
-  }
-
-  /* icon */
-  .icon{
-    display:inline-grid;
-    place-items:center;
-    width:36px;
-    height:36px;
-    border-radius:8px;
-    background: rgba(255,255,255,.12);
-    flex: 0 0 36px;
-    font-size:18px;
-  }
-
-  /* nút đóng */
-  .close-btn{
-    appearance:none;
-    border: 0;
-    background: rgba(255,255,255,.12);
-    color: var(--text);
-    padding: 8px 10px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:700;
-    font-size:14px;
-  }
-  .close-btn:focus{ outline:2px solid rgba(255,255,255,.3); outline-offset:2px; }
-
-  /* animations */
-  @keyframes marquee{
-    0% { transform: translateX(0%); }
-    50% { transform: translateX(-20%); }
-    100% { transform: translateX(0%); }
-  }
-  @keyframes float{
-    0%{ transform: translateY(0px); }
-    50%{ transform: translateY(-6px); }
-    100%{ transform: translateY(0px); }
-  }
-
-  /* responsive nhỏ */
-  @media (max-width:520px){
-    :root{ --height: 68px; --font-sz: 15px; }
-    body{ padding-top: calc(var(--height) + 18px); }
-    .top-banner{ left:8px; right:8px; top:8px; padding:10px; gap:8px; }
-    .icon{ width:40px; height:40px; }
-  }
-
-  /* ẩn khi đóng (dùng JS để thêm class) */
-  .top-banner.hidden{
-    transform: translateY(-150%);
-    opacity: 0;
-    transition: all .45s cubic-bezier(.2,.9,.3,1);
-    pointer-events: none;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiDiPizza</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-<!-- Banner -->
-<div class="top-banner" id="siteBanner" role="status" aria-live="polite" aria-atomic="true">
-  <div class="icon" aria-hidden="true">🚧</div>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="DiDiPizza Logo" class="logo">
+                <div class="contact-icons">
+                    <a href="mailto:demo@hieu.com"><i class="fas fa-envelope"></i></a>
+                    <a href="tel:"><i class="fas fa-phone"></i></a>
+                    <a href="https://maps.app.goo.gl/mBJKWT7twrkUma9MA?g_st=ipc" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
+                </div>
+            </div>
+            <div class="language-switcher">
+                <button id="lang-en" class="active">EN</button>
+                <button id="lang-vi">VI</button>
+            </div>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#about" data-lang="home">Home</a></li>
+                <li><a href="#menu" data-lang="menu">Menu</a></li>
+                <li><a href="#info" data-lang="info">Info</a></li>
+                <li><a href="#map" data-lang="map">Map</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <div class="banner-text">
-    <!-- Marquee/loop để trông động, có thể bỏ animation nếu không muốn -->
-    <div class="marquee" id="bannerMsg">( Hiếu Đang Quá Trình Phát Triển Website )</div>
-  </div>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <img src="images/logo.png" alt="DiDiPizza Logo" class="hero-logo">
+                <h1 class="hero-title">DiDiPizza</h1>
+                <div class="description-slider">
+                    <p class="slide active" data-lang="desc1">The best pizza in town.</p>
+                    <p class="slide" data-lang="desc2">Fresh ingredients, authentic taste.</p>
+                    <p class="slide" data-lang="desc3">Family friendly, great atmosphere.</p>
+                    <p class="slide" data-lang="desc4">Delivery and take-away available.</p>
+                    <p class="slide" data-lang="desc5">Order online now!</p>
+                </div>
+            </div>
+        </section>
 
-  <button class="close-btn" id="closeBanner" aria-label="Đóng thông báo">Đóng ✕</button>
-</div>
+        <section id="about" class="content-section">
+            <h2 data-lang="about_us">About Us</h2>
+            <p data-lang="about_text">Welcome to DiDiPizza, where we serve the most delicious pizzas in Hoi An, made with love and the freshest local ingredients. Our passion for authentic Italian pizza and our commitment to quality make us the perfect choice for a memorable meal.</p>
+        </section>
 
-<!-- Nội dung mẫu bên dưới (chỉ để test vị trí) -->
-<main style="padding:20px;">
-  <h1>Trang demo</h1>
-  <p>Đây là trang mẫu để bạn thấy banner hiển thị cố định ở trên cùng. Thay đổi nội dung banner bằng cách chỉnh trong thẻ &lt;div id="bannerMsg"&gt;.</p>
-</main>
+        <section id="menu" class="content-section">
+            <h2 data-lang="our_menu">Our Menu</h2>
+            <div class="menu-slider-container">
+                <div class="menu-slider">
+                    <div class="menu-page active">
+                        <h3>Page 1</h3>
+                        <ul>
+                            <li>Margherita</li>
+                            <li>Pepperoni</li>
+                            <li>Hawaiian</li>
+                        </ul>
+                    </div>
+                    <div class="menu-page">
+                        <h3>Page 2</h3>
+                        <ul>
+                            <li>Vegetarian</li>
+                            <li>Meat Lovers</li>
+                            <li>BBQ Chicken</li>
+                        </ul>
+                    </div>
+                    <div class="menu-page">
+                        <h3>Page 3</h3>
+                        <ul>
+                            <li>Seafood</li>
+                            <li>Four Cheese</li>
+                            <li>Spicy Diavola</li>
+                        </ul>
+                    </div>
+                     <div class="menu-page">
+                        <h3>Page 4</h3>
+                        <ul>
+                            <li>Calzone</li>
+                            <li>Prosciutto e Funghi</li>
+                            <li>Capricciosa</li>
+                        </ul>
+                    </div>
+                     <div class="menu-page">
+                        <h3>Page 5</h3>
+                        <ul>
+                            <li>Garlic Bread</li>
+                            <li>Salads</li>
+                            <li>Desserts</li>
+                        </ul>
+                    </div>
+                     <div class="menu-page">
+                        <h3>Page 6</h3>
+                        <ul>
+                            <li>Soft Drinks</li>
+                            <li>Beer</li>
+                            <li>Wine</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="menu-controls">
+                    <button id="prev-page" data-lang="prev">Previous</button>
+                    <button id="next-page" data-lang="next">Next</button>
+                </div>
+            </div>
+        </section>
 
-<script>
-  (function(){
-    const banner = document.getElementById('siteBanner');
-    const closeBtn = document.getElementById('closeBanner');
+        <section id="info" class="content-section">
+            <h2 data-lang="website_info">Website Information</h2>
+            <p><strong><span data-lang="name">Name</span>:</strong> DiDiPizza</p>
+            <p><strong><span data-lang="address">Address</span>:</strong> 462 Cua Dai, Hoi An</p>
+            <p><strong><span data-lang="email">Email</span>:</strong> demo@hieu.com</p>
+        </section>
 
-    // Tùy chọn: lưu trạng thái đóng trong localStorage để lần sau không hiện lại
-    const STORAGE_KEY = 'banner_hidden_v1';
-    if (localStorage.getItem(STORAGE_KEY) === '1') {
-      banner.classList.add('hidden');
-    }
+        <section id="map" class="content-section">
+            <h2 data-lang="find_us">Find Us</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3846.993952516712!2d108.3599059759232!3d15.88218794698579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420d077d7f872d%3A0x9591462479e39023!2zNDYyIMSQLiBD4butYSDEkOG6oWksIEPhuqltIENow6gsIEjhu5lpIEFuLCBRdeG6o25nIE5hbSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1700052386348!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3846.993952516712!2d108.3599059759232!3d15.88218794698579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420d077d7f872d%3A0x9591462479e39023!2zNDYyIMSQLiBD4butYSDEkOG6oWksIEPhuqltIENow6gsIEjhu5lpIEFuLCBRdeG6o25nIE5hbSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1700052386348!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+    </main>
 
-    closeBtn.addEventListener('click', function(){
-      banner.classList.add('hidden');
-      try { localStorage.setItem(STORAGE_KEY, '1'); } catch(e){}
-    });
+    <footer>
+        <p data-lang="copyright">&copy; 2025 DiDiPizza. All Rights Reserved.</p>
+    </footer>
 
-    // Nếu muốn thay văn bản từ JS (ví dụ: đa ngôn ngữ), chỉnh ở đây:
-    // document.getElementById('bannerMsg').textContent = '( Hiếu Đang Quá Trình Phát Triển Website )';
-  })();
-</script>
-
+    <script src="js/script.js"></script>
 </body>
 </html>
