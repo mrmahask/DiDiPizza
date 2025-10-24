@@ -1,16 +1,26 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Menu
+    
+    // Mobile Menu Toggle
     const mobileMenu = document.getElementById('mobile-menu');
-    const navbar = document.querySelector('.navbar');
+    const navbar = document.getElementById('navbar');
 
     mobileMenu.addEventListener('click', () => {
         mobileMenu.classList.toggle('active');
         navbar.classList.toggle('active');
     });
 
-    // Description Slider
+    // Close mobile menu when a link is clicked
+    navbar.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+            mobileMenu.classList.remove('active');
+            navbar.classList.remove('active');
+        }
+    });
+
+    // Description Text Slider
     const slides = document.querySelectorAll('.description-slider .slide');
     let currentSlide = 0;
+    const slideInterval = 3000; // 3 seconds
 
     function showSlide(index) {
         slides.forEach((slide, i) => {
@@ -26,10 +36,10 @@ document.addEventListener('DOMContentLoaded', function() {
         showSlide(currentSlide);
     }
 
-    setInterval(nextSlide, 3000);
-    showSlide(currentSlide);
+    setInterval(nextSlide, slideInterval);
+    showSlide(currentSlide); // Initial slide
 
-    // Menu Slider
+    // Image Menu Slider
     const menuSlider = document.querySelector('.menu-slider');
     const menuPages = document.querySelectorAll('.menu-page');
     const prevBtn = document.getElementById('prev-page');
@@ -41,17 +51,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     nextBtn.addEventListener('click', () => {
-        if (currentPage < menuPages.length - 1) {
-            currentPage++;
-            updateMenuSlider();
-        }
+        currentPage = (currentPage < menuPages.length - 1) ? currentPage + 1 : 0; // Loop to start
+        updateMenuSlider();
     });
 
     prevBtn.addEventListener('click', () => {
-        if (currentPage > 0) {
-            currentPage--;
-            updateMenuSlider();
-        }
+        currentPage = (currentPage > 0) ? currentPage - 1 : menuPages.length - 1; // Loop to end
+        updateMenuSlider();
     });
 
     // Language Switcher
@@ -61,9 +67,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const translations = {
         en: {
             home: 'Home',
+            about_us_nav: 'About Us',
             menu: 'Menu',
             info: 'Info',
-            map: 'Map',
             desc1: 'The best pizza in town.',
             desc2: 'Fresh ingredients, authentic taste.',
             desc3: 'Family friendly, great atmosphere.',
@@ -78,14 +84,13 @@ document.addEventListener('DOMContentLoaded', function() {
             name: 'Name',
             address: 'Address',
             email: 'Email',
-            find_us: 'Find Us',
             copyright: '&copy; 2025 DiDiPizza. All Rights Reserved.'
         },
         vi: {
             home: 'Trang Chủ',
+            about_us_nav: 'Về Chúng Tôi',
             menu: 'Thực Đơn',
             info: 'Thông Tin',
-            map: 'Bản Đồ',
             desc1: 'Pizza ngon nhất trong thị trấn.',
             desc2: 'Nguyên liệu tươi, hương vị đích thực.',
             desc3: 'Thân thiện với gia đình, không khí tuyệt vời.',
@@ -100,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
             name: 'Tên',
             address: 'Địa Chỉ',
             email: 'Email',
-            find_us: 'Tìm Chúng Tôi',
             copyright: '&copy; 2025 DiDiPizza. Bảo lưu mọi quyền.'
         }
     };
@@ -113,20 +117,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        document.documentElement.lang = lang;
+
         if (lang === 'en') {
             langEnBtn.classList.add('active');
             langViBtn.classList.remove('active');
-            document.documentElement.lang = 'en';
         } else {
             langViBtn.classList.add('active');
             langEnBtn.classList.remove('active');
-            document.documentElement.lang = 'vi';
         }
     }
 
     langEnBtn.addEventListener('click', () => switchLanguage('en'));
     langViBtn.addEventListener('click', () => switchLanguage('vi'));
 
-    // Set default language
+    // Set default language on page load
     switchLanguage('en');
 });
