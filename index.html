@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Thông báo - Hiếu</title>
+<style>
+  :root{
+    --bg: linear-gradient(90deg,#ff7a18,#af002d 50%,#4a00e0);
+    --text: #fff;
+    --height: 56px;
+    --shadow: 0 4px 18px rgba(0,0,0,.18);
+    --radius: 6px;
+    --gap: 12px;
+    --font-sz: 16px;
+  }
+
+  /* wrapper để không che nội dung khi fixed */
+  body{ margin:0; font-family: Inter, Roboto, "Helvetica Neue", Arial, sans-serif; padding-top: calc(var(--height) + 12px); }
+
+  /* banner */
+  .top-banner{
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    top: 12px;
+    height: var(--height);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: var(--gap);
+    padding: 0 12px;
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--text);
+    box-shadow: var(--shadow);
+    z-index: 9999;
+    overflow: hidden;
+    backdrop-filter: blur(6px);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* văn bản cuộn nhẹ nếu dài */
+  .banner-text{
+    flex: 1 1 auto;
+    min-width: 0;
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    font-size: var(--font-sz);
+    font-weight: 600;
+    letter-spacing: .2px;
+  }
+
+  .marquee{
+    display:inline-block;
+    white-space: nowrap;
+    will-change: transform;
+    animation: marquee 12s linear infinite;
+  }
+
+  /* icon */
+  .icon{
+    display:inline-grid;
+    place-items:center;
+    width:36px;
+    height:36px;
+    border-radius:8px;
+    background: rgba(255,255,255,.12);
+    flex: 0 0 36px;
+    font-size:18px;
+  }
+
+  /* nút đóng */
+  .close-btn{
+    appearance:none;
+    border: 0;
+    background: rgba(255,255,255,.12);
+    color: var(--text);
+    padding: 8px 10px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:700;
+    font-size:14px;
+  }
+  .close-btn:focus{ outline:2px solid rgba(255,255,255,.3); outline-offset:2px; }
+
+  /* animations */
+  @keyframes marquee{
+    0% { transform: translateX(0%); }
+    50% { transform: translateX(-20%); }
+    100% { transform: translateX(0%); }
+  }
+  @keyframes float{
+    0%{ transform: translateY(0px); }
+    50%{ transform: translateY(-6px); }
+    100%{ transform: translateY(0px); }
+  }
+
+  /* responsive nhỏ */
+  @media (max-width:520px){
+    :root{ --height: 68px; --font-sz: 15px; }
+    body{ padding-top: calc(var(--height) + 18px); }
+    .top-banner{ left:8px; right:8px; top:8px; padding:10px; gap:8px; }
+    .icon{ width:40px; height:40px; }
+  }
+
+  /* ẩn khi đóng (dùng JS để thêm class) */
+  .top-banner.hidden{
+    transform: translateY(-150%);
+    opacity: 0;
+    transition: all .45s cubic-bezier(.2,.9,.3,1);
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- Banner -->
+<div class="top-banner" id="siteBanner" role="status" aria-live="polite" aria-atomic="true">
+  <div class="icon" aria-hidden="true">🚧</div>
+
+  <div class="banner-text">
+    <!-- Marquee/loop để trông động, có thể bỏ animation nếu không muốn -->
+    <div class="marquee" id="bannerMsg">( Hiếu Đang Quá Trình Phát Triển Website )</div>
+  </div>
+
+  <button class="close-btn" id="closeBanner" aria-label="Đóng thông báo">Đóng ✕</button>
+</div>
+
+<!-- Nội dung mẫu bên dưới (chỉ để test vị trí) -->
+<main style="padding:20px;">
+  <h1>Trang demo</h1>
+  <p>Đây là trang mẫu để bạn thấy banner hiển thị cố định ở trên cùng. Thay đổi nội dung banner bằng cách chỉnh trong thẻ &lt;div id="bannerMsg"&gt;.</p>
+</main>
+
+<script>
+  (function(){
+    const banner = document.getElementById('siteBanner');
+    const closeBtn = document.getElementById('closeBanner');
+
+    // Tùy chọn: lưu trạng thái đóng trong localStorage để lần sau không hiện lại
+    const STORAGE_KEY = 'banner_hidden_v1';
+    if (localStorage.getItem(STORAGE_KEY) === '1') {
+      banner.classList.add('hidden');
+    }
+
+    closeBtn.addEventListener('click', function(){
+      banner.classList.add('hidden');
+      try { localStorage.setItem(STORAGE_KEY, '1'); } catch(e){}
+    });
+
+    // Nếu muốn thay văn bản từ JS (ví dụ: đa ngôn ngữ), chỉnh ở đây:
+    // document.getElementById('bannerMsg').textContent = '( Hiếu Đang Quá Trình Phát Triển Website )';
+  })();
+</script>
+
+</body>
+</html>
