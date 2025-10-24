@@ -14,9 +14,9 @@
             <div class="logo-container">
                 <img src="logo.png.jpg" alt="DiDiPizza Logo" class="logo">
                 <div class="contact-icons">
-                    <a href="mailto:demo@hieu.com"><i class="fas fa-envelope"></i></a>
-                    <a href="tel:"><i class="fas fa-phone"></i></a>
-                    <a href="https://maps.app.goo.gl/mBJKWT7twrkUma9MA?g_st=ipc" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
+                    <a href="mailto:demo@hieu.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="tel:0123456789" aria-label="Phone"><i class="fas fa-phone"></i></a>
+                    <a href="https://maps.app.goo.gl/mBJKWT7twrkUma9MA?g_st=ipc" target="_blank" aria-label="Map"><i class="fas fa-map-marker-alt"></i></a>
                 </div>
             </div>
             <div class="language-switcher">
@@ -29,18 +29,18 @@
                 <span class="bar"></span>
             </div>
         </div>
-        <nav class="navbar">
+        <nav class="navbar" id="navbar">
             <ul>
-                <li><a href="#about" data-lang="home">Home</a></li>
+                <li><a href="#hero" data-lang="home">Home</a></li>
+                <li><a href="#about" data-lang="about_us_nav">About Us</a></li>
                 <li><a href="#menu" data-lang="menu">Menu</a></li>
                 <li><a href="#info" data-lang="info">Info</a></li>
-                <li><a href="#map" data-lang="map">Map</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section class="hero">
+        <section class="hero" id="hero">
             <div class="hero-content">
                 <img src="logo.png.jpg" alt="DiDiPizza Logo" class="hero-logo">
                 <h1 class="hero-title">DiDiPizza</h1>
@@ -59,58 +59,16 @@
             <p data-lang="about_text">Welcome to DiDiPizza, where we serve the most delicious pizzas in Hoi An, made with love and the freshest local ingredients. Our passion for authentic Italian pizza and our commitment to quality make us the perfect choice for a memorable meal.</p>
         </section>
 
-        <section id="menu" class="content-section">
+        <section id="menu" class="content-section menu-section">
             <h2 data-lang="our_menu">Our Menu</h2>
             <div class="menu-slider-container">
                 <div class="menu-slider">
-                    <div class="menu-page active">
-                        <h3>Page 1</h3>
-                        <ul>
-                            <li>Margherita</li>
-                            <li>Pepperoni</li>
-                            <li>Hawaiian</li>
-                        </ul>
-                    </div>
-                    <div class="menu-page">
-                        <h3>Page 2</h3>
-                        <ul>
-                            <li>Vegetarian</li>
-                            <li>Meat Lovers</li>
-                            <li>BBQ Chicken</li>
-                        </ul>
-                    </div>
-                    <div class="menu-page">
-                        <h3>Page 3</h3>
-                        <ul>
-                            <li>Seafood</li>
-                            <li>Four Cheese</li>
-                            <li>Spicy Diavola</li>
-                        </ul>
-                    </div>
-                     <div class="menu-page">
-                        <h3>Page 4</h3>
-                        <ul>
-                            <li>Calzone</li>
-                            <li>Prosciutto e Funghi</li>
-                            <li>Capricciosa</li>
-                        </ul>
-                    </div>
-                     <div class="menu-page">
-                        <h3>Page 5</h3>
-                        <ul>
-                            <li>Garlic Bread</li>
-                            <li>Salads</li>
-                            <li>Desserts</li>
-                        </ul>
-                    </div>
-                     <div class="menu-page">
-                        <h3>Page 6</h3>
-                        <ul>
-                            <li>Soft Drinks</li>
-                            <li>Beer</li>
-                            <li>Wine</li>
-                        </ul>
-                    </div>
+                    <div class="menu-page active"><img src="images/menu-1.jpg" alt="Pasta Menu"></div>
+                    <div class="menu-page"><img src="images/menu-2.jpg" alt="Pasta and Lasagna Menu"></div>
+                    <div class="menu-page"><img src="images/menu-3.jpg" alt="Fast Food Menu"></div>
+                    <div class="menu-page"><img src="images/menu-4.jpg" alt="Classic Pizza Menu"></div>
+                    <div class="menu-page"><img src="images/menu-5.jpg" alt="Meat Love Pizza Menu"></div>
+                    <div class="menu-page"><img src="images/menu-6.jpg" alt="Vegetarian Pizza Menu"></div>
                 </div>
                 <div class="menu-controls">
                     <button id="prev-page" data-lang="prev">Previous</button>
@@ -124,13 +82,9 @@
             <p><strong><span data-lang="name">Name</span>:</strong> DiDiPizza</p>
             <p><strong><span data-lang="address">Address</span>:</strong> 462 Cua Dai, Hoi An</p>
             <p><strong><span data-lang="email">Email</span>:</strong> demo@hieu.com</p>
-        </section>
-
-        <section id="map" class="content-section">
-            <h2 data-lang="find_us">Find Us</h2>
             <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3846.993952516712!2d108.3599059759232!3d15.88218794698579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420d077d7f872d%3A0x9591462479e39023!2zNDYyIMSQLiBD4butYSDEkOG6oWksIEPhuqltIENow6gsIEjhu5lpIEFuLCBRdeG6o25nIE5hbSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1700052386348!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3846.993952516712!2d108.3599059759232!3d15.88218794698579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420d077d7f872d%3A0x9591462479e39023!2zNDYyIMSQLiBD4butYSDEkOG6oWksIEPhuqltIENow6gsIEjhu5lpIEFuLCBRdeG6o25nIE5hbSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1700052386348!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3846.993952516712!2d108.3599059759232!3d15.88218794698579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420d077d7f872d%3A0x9591462479e39023!2zNDYyIMSQLiBD4butYSDEkOG6oWksIEPhuqltIENow6gsIEjhu5lpIEFuLCBRdeG6o25nIE5hbSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1700052386348!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15387.82823055722!2d108.3305608!3d15.8833075!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420d1396a84f7f%3A0x36b06bee1add952b!2zS2h1IENhZ25nIEjhu5lpIEFu!5e0!3m2!1svi!2s!4v1721051512404!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </section>
     </main>
