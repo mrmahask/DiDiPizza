@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
             navMenu: "Menu",
             navContact: "Contact",
             navReserve: "Reserve Now",
-            heroTitle: "A Slice of Italy in Hoi An",
+            heroTitle: "Fresh Pizza Every Day",
             subtitle1: "Experience authentic pizza crafted with passion.",
             subtitle2: "We have a passion for pizza.",
             subtitle3: "We are open Monday to Sunday from 13:00 to 22:00.",
