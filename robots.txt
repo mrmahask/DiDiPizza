@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Chặn các thư mục không cần SEO
+Disallow: /wp-admin/
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /private/
+
+# Cho phép file CSS, JS để Google render đầy đủ
+Allow: /*.css$
+Allow: /*.js$
+
+# Sitemap để bot biết toàn bộ URL
+Sitemap: https://didipizza.vercel.app/sitemap.xml
