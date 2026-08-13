@@ -1,186 +1,756 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DiDi Pizza - Pizza in Hoi An</title>
+    <title>DiDi Pizza - Authentic Pizza in Hoi An</title>
     <meta name="description" content="Thưởng thức pizza Hội An ngon nhất tại DiDi Pizza! Pizza tươi làm mỗi ngày, đế mỏng giòn, nguyên liệu cao cấp. Đặt ngay pizza hot tại Hội An, Quảng Nam.">
     <meta name="keywords" content="pizza hội an, pizza quảng nam, pizza hot hội an, didi pizza, pizza ngon hội an, nhà hàng pizza hội an, đặt pizza hội an, pizza Ý tại hội an, ẩm thực hội an">
     <link rel="canonical" href="https://didipizza.vercel.app/">
+    
     <meta property="og:title" content="DiDi Pizza Hội An | Pizza Tươi Ngon Chuẩn Vị Ý">
     <meta property="og:description" content="Khám phá hương vị pizza Ý đích thực giữa lòng phố cổ. Pizza tươi mỗi ngày, dịch vụ tận tâm.">
     <meta property="og:image" content="https://didipizza.vercel.app/logo.png">
     <meta property="og:url" content="https://didipizza.vercel.app/">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
 
-    <header class="header" id="header">
-        <div class="header-container">
-            <a href="#hero" class="logo-link">
-                <img src="logo.png" alt="DiDiPizza Logo" class="logo">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-handwriting { font-family: 'Caveat', cursive; }
+        
+        .glass-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.85) 0%, rgba(14, 14, 14, 0.95) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out, transform 6s ease;
+            transform: scale(1.05);
+        }
+        .hero-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .touch-slider {
+            touch-action: pan-y;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        #lightbox-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #lightbox-modal.active #lightbox-img {
+            transform: scale(1);
+        }
+        #lightbox-modal.active #lightbox-img.rotate-fix {
+            transform: rotate(90deg) scale(0.78);
+        }
+    </style>
+</head>
+<body class="bg-neutral-950 text-neutral-100 selection:bg-amber-500 selection:text-black antialiased">
+
+    <header class="fixed top-0 left-0 w-full z-50 bg-neutral-950/85 backdrop-blur-lg border-b border-neutral-800">
+        <div class="max-w-6xl mx-auto px-5 h-20 flex items-center justify-between">
+            <a href="#hero" class="flex items-center gap-2">
+                <span class="text-2xl font-serif font-bold tracking-wider text-amber-500 flex items-center gap-2 hover:opacity-90 transition">
+                    🍕 DÌDI PIZZA
+                </span>
             </a>
-            <nav class="main-nav" id="main-nav">
-                <ul>
-                    <li><a href="#about" data-key="navAbout">Our Story</a></li>
-                    <li><a href="#menu" data-key="navMenu">Menu</a></li>
-                    <li><a href="#contact" data-key="navContact">Contact</a></li>
-                </ul>
+
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-300">
+                <a href="#about" class="hover:text-amber-400 transition" data-key="navAbout">Our Story</a>
+                <a href="#menu" class="hover:text-amber-400 transition" data-key="navMenu">Menu</a>
+                <a href="#introduction" class="hover:text-amber-400 transition" data-key="navIntro">Highlights</a>
+                <a href="#contact" class="hover:text-amber-400 transition" data-key="navContact">Visit Us</a>
             </nav>
-            <div class="header-right">
-                 <div class="contact-icons">
-                    <a href="tel:+84938556904" title="Phone"><i class="fas fa-phone"></i></a>
-                    <a href="https://wa.me/84938556904" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://www.google.com/maps/search/?api=1&query=DiDi+Pizza+Hoi+An" target="_blank" title="Location"><i class="fas fa-map-marker-alt"></i></a>
+
+            <div class="flex items-center gap-3 sm:gap-4">
+                <div class="hidden sm:flex items-center gap-3 text-neutral-400 text-base">
+                    <a href="tel:+84938556904" title="Phone" class="hover:text-amber-400 transition"><i class="fas fa-phone"></i></a>
+                    <a href="https://wa.me/84938556904" target="_blank" title="WhatsApp" class="hover:text-emerald-400 transition"><i class="fab fa-whatsapp text-lg"></i></a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=DiDi+Pizza+Hoi+An" target="_blank" title="Location" class="hover:text-red-400 transition"><i class="fas fa-map-marker-alt"></i></a>
                 </div>
-                <div class="language-switcher">
-                    <button id="lang-en" class="active">EN</button>
-                    <button id="lang-vi">VI</button>
+
+                <div class="flex items-center bg-neutral-900 border border-neutral-700/80 rounded-full p-1 text-xs font-bold shadow-inner">
+                    <button onclick="changeLang('en')" id="lang-en" class="px-3 py-1.5 rounded-full bg-amber-500 text-black transition-all">EN</button>
+                    <button onclick="changeLang('vi')" id="lang-vi" class="px-3 py-1.5 rounded-full text-neutral-400 hover:text-white transition-all">VI</button>
                 </div>
-                 <a href="#contact" class="cta-button" data-key="navReserve">Reserve Now</a>
-                 <div class="menu-toggle" id="menu-toggle">
+
+                <a href="#contact" class="hidden lg:inline-block bg-amber-500 hover:bg-amber-400 text-black px-5 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-amber-500/20 active:scale-95" data-key="navReserve">
+                    Reserve Now
+                </a>
+
+                <button onclick="toggleMobileMenu()" class="md:hidden text-neutral-300 hover:text-white text-xl p-2 focus:outline-none">
                     <i class="fas fa-bars"></i>
-                </div>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-neutral-900/95 border-b border-neutral-800 px-6 py-5 flex flex-col gap-4 text-sm font-medium">
+            <a href="#about" onclick="toggleMobileMenu()" class="hover:text-amber-400" data-key="navAbout">Our Story</a>
+            <a href="#menu" onclick="toggleMobileMenu()" class="hover:text-amber-400" data-key="navMenu">Menu</a>
+            <a href="#introduction" onclick="toggleMobileMenu()" class="hover:text-amber-400" data-key="navIntro">Highlights</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="hover:text-amber-400" data-key="navContact">Visit Us</a>
+            <div class="flex items-center gap-4 pt-2 border-t border-neutral-800 text-neutral-300">
+                <a href="tel:+84938556904" class="flex items-center gap-2 hover:text-amber-400"><i class="fas fa-phone"></i> Call</a>
+                <a href="https://wa.me/84938556904" target="_blank" class="flex items-center gap-2 hover:text-emerald-400"><i class="fab fa-whatsapp"></i> WhatsApp</a>
             </div>
         </div>
     </header>
 
     <main>
-        <section id="hero" class="hero-section">
-            <div class="hero-background-slider">
-                <div class="bg-slide active" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_20251031b456ba05a0f8c874a5e65c1639327a23.jpg');"></div>
-                <div class="bg-slide" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_20251031c592a227871113d59e639666a581cbdf.jpg');"></div>
-                <div class="bg-slide" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_202510313e8e5fd7e28bdd01c5c621b366b864d6.jpg');"></div>
-                <div class="bg-slide" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_2025103168b49590b9d0dd6012be3e8cfa0a2741.jpg');"></div>
-                <div class="bg-slide" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_202510319c3627a5917bb739d1a35a3df3805fbc.jpg');"></div>
-                <div class="bg-slide" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_2025103109c7bb696c8860835cae31f4e61337a0.jpg');"></div>
-                <div class="bg-slide" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_20251031134d3c67b9f07e1164d233cb754595b6.jpg');"></div>
-                <div class="bg-slide" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_202510313f650e4253b9e9dd1ee44cb7b73b887a.jpg');"></div>
-                <div class="bg-slide" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_20251031141ab17063d6f3ab11d1ce5143416026.jpg');"></div>
+        <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <div class="hero-slide active" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_20251031b456ba05a0f8c874a5e65c1639327a23.jpg');"></div>
+                <div class="hero-slide" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_20251031c592a227871113d59e639666a581cbdf.jpg');"></div>
+                <div class="hero-slide" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_202510313e8e5fd7e28bdd01c5c621b366b864d6.jpg');"></div>
+                <div class="hero-slide" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_2025103168b49590b9d0dd6012be3e8cfa0a2741.jpg');"></div>
+                <div class="hero-slide" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_202510319c3627a5917bb739d1a35a3df3805fbc.jpg');"></div>
+                <div class="hero-slide" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_2025103109c7bb696c8860835cae31f4e61337a0.jpg');"></div>
+                <div class="hero-slide" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_20251031134d3c67b9f07e1164d233cb754595b6.jpg');"></div>
+                <div class="hero-slide" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_202510313f650e4253b9e9dd1ee44cb7b73b887a.jpg');"></div>
+                <div class="hero-slide" style="background-image: url('https://sf-static.upanhlaylink.com/img/image_20251031141ab17063d6f3ab11d1ce5143416026.jpg');"></div>
             </div>
-            <div class="overlay"></div>
-            <div class="hero-content">
-                <h1 class="hero-title" data-key="heroTitle">Fresh Pizza Every Day</h1>
-                <div class="hero-subtitle-slider">
-                    <p class="subtitle-item active" data-key="subtitle1">Experience authentic pizza crafted with passion.</p>
-                    <p class="subtitle-item" data-key="subtitle2">We have a passion for pizza.</p>
-                    <p class="subtitle-item" data-key="subtitle3">We are open Monday to Sunday from 13:00 to 22:00.</p>
-                    <p class="subtitle-item" data-key="subtitle4">Dedicated service.</p>
-                </div>
-                <a href="#menu" class="cta-button" data-key="heroButton">Explore Our Menu</a>
-            </div>
-        </section>
 
-        <section id="about" class="content-section">
-            <div class="section-container">
-                <h2 data-key="aboutTitle">Our Story</h2>
-                <p data-key="aboutText">Welcome to DiDi Pizza, where we bring a slice of Italy to the heart of Hoi An. Our passion for authentic pizza is reflected in every dish we create. Using only the freshest local ingredients and traditional recipes, we promise a dining experience that is both delicious and unforgettable. Join us and taste the difference.</p>
-            </div>
-        </section>
-        
-        <section id="menu" class="content-section menu-section">
-            <div class="section-container">
-                <h2 data-key="menuTitle">Our Menu</h2>
-                <div class="menu-slider-container">
-                    <div class="menu-slider" id="menu-slider">
-                        <div class="menu-item">
-                            <img src="https://sf-static.upanhlaylink.com/img/image_20251026c7b9f109f0ba4f803bd6ec31c88e2340.jpg" alt="Margherita Pizza">
-                        </div>
-                        <div class="menu-item">
-                            <img src="https://sf-static.upanhlaylink.com/img/image_202510269c14cb99e061e1a32157d700d4e27364.jpg" alt="Pepperoni Pizza">
-                        </div>
-                        <div class="menu-item">
-                            <img src="https://sf-static.upanhlaylink.com/img/image_2025102659ba0f388b105f336a5657edc09c1142.jpg" alt="Hawaiian Pizza">
-                        </div>
-                        <div class="menu-item">
-                            <img src="https://s.ibytecdn.org/https://sf-static.upanhlaylink.com/img/image_20251118b057f411335c96ded65880cccf003b91.jpg" alt="Seafood Pizza">
-                        </div>
-                        <div class="menu-item">
-                            <img src="https://sf-static.upanhlaylink.com/img/image_20251026042019bb093b9ffc361f1e1377790064.jpg" alt="Seafood Pizza">
-                        </div>
-                        <div class="menu-item">
-                            <img src="https://sf-static.upanhlaylink.com/img/image_202510269797c4ebdb0c317426252163d3445893.jpg" alt="Seafood Pizza">
-                        </div>
-                        <div class="menu-item">
-                            <img src="https://s.ibytecdn.org/https://sf-static.upanhlaylink.com/img/image_20251118b0ebcfd581c0d7abdfb25f61fc5e17d6.jpg" alt="Seafood Pizza">
-                        </div>
-                        <div class="menu-item">
-                            <img src="https://s.ibytecdn.org/https://sf-static.upanhlaylink.com/img/image_20251118411d75ab7e9d719512de18e27ef57302.jpg" alt="Seafood Pizza">
-                        </div>
-                    </div>
-                    <button class="menu-nav-btn prev" id="prev-btn" title="Previous"><i class="fas fa-arrow-left"></i></button>
-                    <button class="menu-nav-btn next" id="next-btn" title="Next"><i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-        </section>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-neutral-950 z-10"></div>
 
-        <section id="introduction" class="content-section">
-            <div class="section-container">
-                <h2 data-key="introTitle">Didi Pizza - Fresh pizza daily in the heart</h2>
-                <p data-key="introParagraph">Are you looking for a great stop in the heart of Hoi An to enjoy the true, fresh pizza every day? Do not miss Didi Pizza, a small but impressive small pizza shop, which brings a different and memorable pizza experience.</p>
+            <div class="relative z-20 max-w-4xl text-center">
+                <span class="inline-flex items-center gap-2 py-2 px-5 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-semibold tracking-widest uppercase mb-6 backdrop-blur-md">
+                    <span>🔥</span> <span>Wood-Fired Pizza • Hoi An</span>
+                </span>
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-serif font-bold tracking-tight mb-6 leading-tight text-white drop-shadow-lg" data-key="heroTitle">
+                    Fresh Pizza Every Day
+                </h1>
                 
-                <h3 data-key="introAdvantagesTitle">Outstanding advantages:</h3>
-                <ul>
-                    <li data-key="introAdvantage1">Pizza refreshes every day - Thin, crispy powder, ingredients are always carefully selected and fresh.</li>
-                    <li data-key="introAdvantage2">Delicate flavor, unique - attractive topping, balanced flavor, light and easy to addicted.</li>
-                    <li data-key="introAdvantage3">Cozy, friendly space - Clean shop, gentle decoration, somewhat overlooking the street for you to enjoy the pace of the Hoi An Life</li>
-                    <li data-key="introAdvantage4">Dedicated service, fast - Customers praise attentive service, fast delivery, reasonable price.</li>
-                    <li data-key="introAdvantage5">Interesting interactive experience - You can see chef Didi performing bakery techniques, throwing pizza in front of guests</li>
-                </ul>
+                <div class="h-12 mb-8 flex items-center justify-center overflow-hidden">
+                    <p id="hero-subtitle" class="text-neutral-200 text-base sm:text-xl font-light transition-all duration-500 drop-shadow" data-key="subtitle1">
+                        Experience authentic pizza crafted with passion.
+                    </p>
+                </div>
 
-                <h3 data-key="introDishesTitle">The dishes to try:</h3>
-                <ul>
-                    <li data-key="introDish1">Gentle pizza can be enough for two people, suitable for light evening.</li>
-                    <li data-key="introDish2">"Best Sellers" such as Catch of the Day, 4 Seasons, or traditional types such as Margarita, BBQ Chicken, Diavola.</li>
-                </ul>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#menu" class="w-full sm:w-auto px-8 py-4 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-full transition duration-300 shadow-xl shadow-amber-500/25 active:scale-95 text-xs uppercase tracking-wider" data-key="heroButton">
+                        Explore Our Menu
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-700/80 font-semibold rounded-full transition text-xs uppercase tracking-wider text-neutral-200 backdrop-blur-md active:scale-95" data-key="navContact">
+                        Visit Our Locations
+                    </a>
+                </div>
             </div>
         </section>
 
-        <section id="contact" class="content-section">
-             <div class="section-container">
-                <h2 data-key="contactTitle">Visit Us</h2>
-                <div class="contact-details">
-                    <div class="contact-info">
-                        <h3 data-key="contactInfoTitle">Information</h3>
-                        <p><strong data-key="contactAddress">Address 1:</strong> 462 Cửa Đại, Cẩm Châu, Hội An, Quảng Nam 560000, Việt Nam</p>
-                        <p><strong data-key="contactAddress">Address 2:</strong> Hẻm 47/32 Trần Hưng Đạo, Phường Minh An, Hội An, Quảng Nam 51000, Việt Nam</p>
-                        <p><strong data-key="contactEmail">Email:</strong> <a href="mailto:didipizza111@gmail.com">didipizza111@gmail.com</a></p>
-                    </div>
-                    <div class="contact-maps">
-                        <h3 data-key="contactMapsTitle">Our Locations</h3>
-                         <div class="map-container">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3837.542762085438!2d108.342108!3d15.880611199999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420dbde61c4963%3A0x637fc86e9f198f0b!2sDiDi%20Pizza!5e0!3m2!1svi!2s!4v1761414914103!5m2!1svi!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            <iframe 
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3837.5813470481235!2d108.3300935!3d15.8784837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420f3c3f571a77%3A0x8e374ff80e69c39!2sPIZZA%20DIDI!5e0!3m2!1svi!2s" 
-  width="100%" 
-  height="450" 
-  style="border:0;" 
-  allowfullscreen="" 
-  loading="lazy" 
-  referrerpolicy="no-referrer-when-downgrade">
-</iframe>
+        <section id="about" class="py-24 px-6 max-w-5xl mx-auto border-t border-neutral-800/80">
+            <div class="glass-card border border-neutral-800/80 rounded-3xl p-8 sm:p-14 text-center relative overflow-hidden shadow-2xl">
+                <span class="font-handwriting text-3xl text-amber-400 block mb-1">Authentic & Pure</span>
+                <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white mb-6" data-key="aboutTitle">Our Story</h2>
+                <div class="w-20 h-1 bg-amber-500 mx-auto rounded-full mb-8"></div>
+                <p class="text-neutral-300 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto font-normal" data-key="aboutText">
+                    Welcome to DiDi Pizza, where we bring a slice of Italy to the heart of Hoi An. Our passion for authentic pizza is reflected in every dish we create. Using only the freshest local ingredients and traditional recipes, we promise a dining experience that is both delicious and unforgettable. Join us and taste the difference.
+                </p>
+            </div>
+        </section>
 
+        <section id="menu" class="py-20 px-4 sm:px-6 max-w-4xl mx-auto border-t border-neutral-800/80">
+            <div class="text-center mb-8">
+                <span class="font-handwriting text-3xl text-amber-400 block mb-1">Wood-Fired Delights</span>
+                <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white mb-3" data-key="menuTitle">Our Menu</h2>
+                <div class="w-20 h-1 bg-amber-500 mx-auto rounded-full mb-4"></div>
+                <p class="text-neutral-400 text-sm max-w-md mx-auto" data-key="menuSwipeHint">Swipe to browse. Click on any image to zoom in full screen.</p>
+            </div>
+
+            <div class="relative group">
+                <div id="menu-viewer-wrapper" class="touch-slider overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900 shadow-2xl cursor-pointer relative">
+                    
+                    <div class="absolute top-4 right-4 z-20 bg-neutral-950/80 hover:bg-amber-500 hover:text-black text-amber-400 border border-amber-500/30 backdrop-blur-md px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 pointer-events-none transition shadow-lg">
+                        <i class="fas fa-search-plus"></i> <span data-key="zoomBadge">Click to Zoom</span>
+                    </div>
+
+                    <div id="menu-viewer-track" class="flex transition-transform duration-500 ease-out">
+                        
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4" onclick="handleImageClick(0)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_2026081449a777e012cac31bb0faf1527d22d6c6.jpg" alt="Menu Page 1" class="max-h-[620px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4" onclick="handleImageClick(1)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_202608148afac0eb221633744220b8d57a15d95c.jpg" alt="Menu Page 2" class="max-h-[620px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4" onclick="handleImageClick(2)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_20260814f77ae800e03b73fa2a6f7016c2429bb8.jpg" alt="Menu Page 3" class="max-h-[620px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4" onclick="handleImageClick(3)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_202608141beaad48a602b4ff083e9c3535bc5a42.jpg" alt="Menu Page 4" class="max-h-[620px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4" onclick="handleImageClick(4)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_20260814af83f57312fe6bd81f14a1f8c88b636d.jpg" alt="Menu Page 5" class="max-h-[620px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4" onclick="handleImageClick(5)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_20260814b108ff4c4dca4d034ed3f89eaded3beb.jpg" alt="Menu Page 6" class="max-h-[620px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4" onclick="handleImageClick(6)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_20260814a5fd3fbec18de76420c566d8020b2708.jpg" alt="Menu Page 7" class="max-h-[620px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4" onclick="handleImageClick(7)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_20260814a5ce9cf029afeced1f1d1cf1f1a8c494.jpg" alt="Menu Page 8" class="max-h-[620px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4" onclick="handleImageClick(8)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_2026081430e0b96c4141bf6fc8c8961d999d166b.jpg" alt="Menu Page 9" class="max-h-[620px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4" onclick="handleImageClick(9)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_202608144cda6ac86a0c54005af0833d71809ccc.jpg" alt="Menu Page 10" class="max-h-[620px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4" onclick="handleImageClick(10)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_2026081486441985519296b5884c9a26f4ec56e9.jpg" alt="Menu Page 11" class="max-h-[620px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4 overflow-hidden" onclick="handleImageClick(11)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_20260814cf8ea46ccb7c12566952076bcc24ce08.jpg" alt="Menu Page 12" class="max-h-[440px] sm:max-h-[500px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none rotate-90 my-6 sm:my-10 hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4" onclick="handleImageClick(12)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_202608142127bc38c0158b1c403630f2be964f78.jpg" alt="Menu Page 13" class="max-h-[620px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4" onclick="handleImageClick(13)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_2026081499be64907450cd870b083b8cd3de11e4.jpg" alt="Menu Page 14" class="max-h-[620px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4" onclick="handleImageClick(14)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_20260814057c14967e97b48feb9471516c9aa30a.jpg" alt="Menu Page 15" class="max-h-[620px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4" onclick="handleImageClick(15)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_20260814c86d477f17674c032e1a9ab75650efc6.jpg" alt="Menu Page 16" class="max-h-[620px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4" onclick="handleImageClick(16)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_202608144db55efb9f302bc69b7d0e4a163fedec.jpg" alt="Menu Page 17" class="max-h-[620px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                        <div class="w-full shrink-0 flex items-center justify-center bg-neutral-950 p-2 sm:p-4" onclick="handleImageClick(17)">
+                            <img src="https://sf-static.upanhlaylink.com/img/image_20260814c388deb0bef2d5e27f44f05bca064f03.jpg" alt="Menu Page 18" class="max-h-[620px] w-auto mx-auto rounded-2xl object-contain shadow-md pointer-events-none hover:scale-[1.01] transition duration-300">
+                        </div>
+
+                    </div>
+
+                    <button onclick="event.stopPropagation(); prevMenuPage();" aria-label="Previous Page" class="absolute top-1/2 -translate-y-1/2 left-3 sm:left-4 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-neutral-950/75 hover:bg-amber-500 hover:text-black text-white backdrop-blur-md border border-white/10 flex items-center justify-center transition-all shadow-xl active:scale-90 z-20">
+                        <i class="fas fa-arrow-left text-sm"></i>
+                    </button>
+                    <button onclick="event.stopPropagation(); nextMenuPage();" aria-label="Next Page" class="absolute top-1/2 -translate-y-1/2 right-3 sm:right-4 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-neutral-950/75 hover:bg-amber-500 hover:text-black text-white backdrop-blur-md border border-white/10 flex items-center justify-center transition-all shadow-xl active:scale-90 z-20">
+                        <i class="fas fa-arrow-right text-sm"></i>
+                    </button>
+
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 px-2">
+                    <div class="text-xs text-neutral-400 flex items-center gap-2">
+                        <span class="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                        <span id="page-counter" class="font-bold text-amber-400">Page 1 of 18</span>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-center gap-1.5 max-w-md" id="menu-dots"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="introduction" class="py-24 px-6 max-w-6xl mx-auto border-t border-neutral-800/80">
+            <div class="text-center mb-14">
+                <span class="font-handwriting text-3xl text-amber-400 block mb-1">Why Choose Us</span>
+                <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white mb-4" data-key="introTitle">DiDi Pizza - Fresh Pizza Daily in the Heart</h2>
+                <p class="text-neutral-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed" data-key="introParagraph">
+                    Are you looking for a great stop in the heart of Hoi An to enjoy true, fresh pizza every day? Do not miss DiDi Pizza, an impressive pizza sanctuary bringing a memorable wood-fired experience.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                
+                <div class="glass-card border border-neutral-800 rounded-3xl p-7 hover:border-amber-500/40 hover:-translate-y-1 transition duration-300">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl mb-5">
+                        <i class="fas fa-pizza-slice"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-2" data-key="adv1_title">Fresh Daily Pizza</h3>
+                    <p class="text-neutral-400 text-xs sm:text-sm leading-relaxed" data-key="introAdvantage1">
+                        Thin, crispy dough fermented slowly, topped with carefully selected, fresh local ingredients.
+                    </p>
+                </div>
+
+                <div class="glass-card border border-neutral-800 rounded-3xl p-7 hover:border-amber-500/40 hover:-translate-y-1 transition duration-300">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl mb-5">
+                        <i class="fas fa-fire-flame-curved"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-2" data-key="adv2_title">Unique Delicate Flavor</h3>
+                    <p class="text-neutral-400 text-xs sm:text-sm leading-relaxed" data-key="introAdvantage2">
+                        Harmonious blend of rich mozzarella, San Marzano tomato sauce, and distinct chef seasonings.
+                    </p>
+                </div>
+
+                <div class="glass-card border border-neutral-800 rounded-3xl p-7 hover:border-amber-500/40 hover:-translate-y-1 transition duration-300">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl mb-5">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-2" data-key="adv3_title">Cozy Hoi An Space</h3>
+                    <p class="text-neutral-400 text-xs sm:text-sm leading-relaxed" data-key="introAdvantage3">
+                        Clean, romantic atmosphere with charming street views to soak in the tranquil Hoi An lifestyle.
+                    </p>
+                </div>
+
+                <div class="glass-card border border-neutral-800 rounded-3xl p-7 hover:border-amber-500/40 hover:-translate-y-1 transition duration-300">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl mb-5">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-2" data-key="adv4_title">Dedicated Service</h3>
+                    <p class="text-neutral-400 text-xs sm:text-sm leading-relaxed" data-key="introAdvantage4">
+                        Warm hospitality, fast serving times, and great value for an authentic Italian culinary journey.
+                    </p>
+                </div>
+
+                <div class="glass-card border border-amber-500/30 rounded-3xl p-7 hover:border-amber-500/60 hover:-translate-y-1 transition duration-300 md:col-span-2 lg:col-span-2 bg-gradient-to-r from-amber-500/10 to-transparent">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 text-xl mb-5">
+                        <i class="fas fa-hand-sparkles"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-2" data-key="adv5_title">Interactive Dough-Tossing Show</h3>
+                    <p class="text-neutral-300 text-xs sm:text-sm leading-relaxed" data-key="introAdvantage5">
+                        Watch Chef DiDi perform bakery techniques and throw pizza dough live right in front of your eyes before placing it into the 400°C stone oven!
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="bg-neutral-900 border border-neutral-800 rounded-3xl p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div>
+                    <h4 class="text-xl font-bold font-serif text-amber-400 mb-1" data-key="introDishesTitle">Must-Try Specialties:</h4>
+                    <p class="text-neutral-300 text-sm" data-key="introDish2">"Best Sellers" such as Catch of the Day, 4 Seasons, Margherita, BBQ Chicken, and Diavola.</p>
+                </div>
+                <a href="#menu" class="px-6 py-3 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-full text-xs uppercase tracking-wider shrink-0 transition" data-key="heroButton">
+                    View Full Menu
+                </a>
+            </div>
+        </section>
+
+        <section id="contact" class="py-24 px-6 max-w-6xl mx-auto border-t border-neutral-800/80">
+            <div class="text-center mb-14">
+                <span class="font-handwriting text-3xl text-amber-400 block mb-1">We Are Ready</span>
+                <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white mb-4" data-key="contactTitle">Visit Us</h2>
+                <div class="w-20 h-1 bg-amber-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                
+                <div class="glass-card border border-neutral-800 rounded-3xl p-8 space-y-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-serif font-bold text-amber-400 mb-6" data-key="contactInfoTitle">Information</h3>
+                        
+                        <div class="space-y-5 text-sm">
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-map-marker-alt text-amber-500 mt-1"></i>
+                                <div>
+                                    <strong class="text-white block" data-key="contactAddress1_lbl">Branch 1:</strong>
+                                    <span class="text-neutral-400">462 Cửa Đại, Cẩm Châu, Hội An, Quảng Nam 560000</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-map-marker-alt text-amber-500 mt-1"></i>
+                                <div>
+                                    <strong class="text-white block" data-key="contactAddress2_lbl">Branch 2:</strong>
+                                    <span class="text-neutral-400">34 Đ. Phan Chu Trinh, Hội An, Đà Nẵng 513000, Việt Nam</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-envelope text-amber-500"></i>
+                                <div>
+                                    <strong class="text-white block">Email:</strong>
+                                    <a href="mailto:didipizza111@gmail.com" class="text-neutral-400 hover:text-amber-400 transition">didipizza111@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-phone text-amber-500"></i>
+                                <div>
+                                    <strong class="text-white block">Hotline / WhatsApp:</strong>
+                                    <a href="tel:+84938556904" class="text-amber-400 font-bold hover:underline">+84 938 556 904</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-clock text-amber-500"></i>
+                                <div>
+                                    <strong class="text-white block">Opening Hours:</strong>
+                                    <span class="text-neutral-400">13:00 - 22:00 (Mon - Sun)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/84938556904" target="_blank" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-full flex items-center justify-center gap-2 transition text-xs uppercase tracking-wider shadow-lg">
+                        <i class="fab fa-whatsapp text-base"></i> Chat on WhatsApp
+                    </a>
+                </div>
+
+                <div class="lg:col-span-2 space-y-6">
+                    <h3 class="text-xl font-serif font-bold text-white flex items-center gap-2" data-key="contactMapsTitle">
+                        <i class="fas fa-location-dot text-amber-500"></i> Our Locations on Map
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="rounded-3xl overflow-hidden border border-neutral-800 shadow-xl bg-neutral-900">
+                            <div class="px-4 py-2 bg-neutral-900 border-b border-neutral-800 text-xs font-semibold text-neutral-300">
+                                📍 Cơ sở 1: 462 Cửa Đại
+                            </div>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3837.542762085438!2d108.342108!3d15.880611199999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420dbde61c4963%3A0x637fc86e9f198f0b!2sDiDi%20Pizza!5e0!3m2!1svi!2s!4v1761414914103!5m2!1svi!2s" width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+
+                        <div class="rounded-3xl overflow-hidden border border-neutral-800 shadow-xl bg-neutral-900">
+                            <div class="px-4 py-2 bg-neutral-900 border-b border-neutral-800 text-xs font-semibold text-neutral-300">
+                                📍 Cơ sở 2: 34 Đ. Phan Chu Trinh
+                            </div>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3837.58320011687!2d108.32751857578975!3d15.878488844514738!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420f3c3f571a77%3A0x8e374ff80e69c39!2sPIZZA%20DIDI!5e0!3m2!1svi!2s!4v1786652681034!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="footer-container">
+    <footer class="bg-neutral-950 border-t border-neutral-800 py-10 px-6 text-center text-xs text-neutral-500">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <p>
-                <span data-key="footerText">&copy; 2025 DiDi Pizza. All Rights Reserved</span> 
-                ©<a href="https://facebook.com/tanhieu206" target="_blank" rel="noopener noreferrer">MaHask</a>
+                <span data-key="footerText">&copy; 2026 DiDi Pizza. All Rights Reserved.</span>
+                <span class="ml-1">Crafted by <a href="https://facebook.com/tanhieu206" target="_blank" rel="noopener noreferrer" class="text-amber-500/80 hover:underline">MaHask</a></span>
             </p>
+            <div class="flex items-center gap-6 text-neutral-400">
+                <a href="#hero" class="hover:text-amber-400 transition">Back to Top ↑</a>
+            </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <div id="lightbox-modal" class="fixed inset-0 z-[999] bg-black/95 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none transition-all duration-300 select-none" onclick="closeLightbox(event)">
+        
+        <button onclick="closeLightboxDirect()" aria-label="Close Zoom" class="absolute top-4 right-4 sm:top-6 sm:right-6 w-12 h-12 rounded-full bg-neutral-900/90 border border-neutral-700 text-white hover:bg-amber-500 hover:text-black flex items-center justify-center text-xl transition-all shadow-2xl z-50">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div class="absolute top-5 left-6 bg-neutral-900/80 border border-neutral-700/80 text-amber-400 text-xs font-bold px-4 py-2 rounded-full backdrop-blur-md">
+            <span id="lightbox-page-counter">Page 1 / 18</span>
+        </div>
+
+        <button onclick="event.stopPropagation(); prevMenuPage(); syncLightbox();" aria-label="Previous" class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-neutral-900/80 hover:bg-amber-500 hover:text-black text-white border border-neutral-700 flex items-center justify-center text-lg transition shadow-2xl z-50">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+
+        <div class="relative max-w-[95vw] max-h-[90vh] flex items-center justify-center" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" alt="Zoomed Menu" class="max-w-[92vw] max-h-[85vh] object-contain rounded-2xl shadow-2xl scale-95 transition-transform duration-300 border border-neutral-800">
+        </div>
+
+        <button onclick="event.stopPropagation(); nextMenuPage(); syncLightbox();" aria-label="Next" class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-neutral-900/80 hover:bg-amber-500 hover:text-black text-white border border-neutral-700 flex items-center justify-center text-lg transition shadow-2xl z-50">
+            <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+
+    <script>
+        const menuImages = [
+            "https://sf-static.upanhlaylink.com/img/image_2026081449a777e012cac31bb0faf1527d22d6c6.jpg",
+            "https://sf-static.upanhlaylink.com/img/image_202608148afac0eb221633744220b8d57a15d95c.jpg",
+            "https://sf-static.upanhlaylink.com/img/image_20260814f77ae800e03b73fa2a6f7016c2429bb8.jpg",
+            "https://sf-static.upanhlaylink.com/img/image_202608141beaad48a602b4ff083e9c3535bc5a42.jpg",
+            "https://sf-static.upanhlaylink.com/img/image_20260814af83f57312fe6bd81f14a1f8c88b636d.jpg",
+            "https://sf-static.upanhlaylink.com/img/image_20260814b108ff4c4dca4d034ed3f89eaded3beb.jpg",
+            "https://sf-static.upanhlaylink.com/img/image_20260814a5fd3fbec18de76420c566d8020b2708.jpg",
+            "https://sf-static.upanhlaylink.com/img/image_20260814a5ce9cf029afeced1f1d1cf1f1a8c494.jpg",
+            "https://sf-static.upanhlaylink.com/img/image_2026081430e0b96c4141bf6fc8c8961d999d166b.jpg",
+            "https://sf-static.upanhlaylink.com/img/image_202608144cda6ac86a0c54005af0833d71809ccc.jpg",
+            "https://sf-static.upanhlaylink.com/img/image_2026081486441985519296b5884c9a26f4ec56e9.jpg",
+            "https://sf-static.upanhlaylink.com/img/image_20260814cf8ea46ccb7c12566952076bcc24ce08.jpg",
+            "https://sf-static.upanhlaylink.com/img/image_202608142127bc38c0158b1c403630f2be964f78.jpg",
+            "https://sf-static.upanhlaylink.com/img/image_2026081499be64907450cd870b083b8cd3de11e4.jpg",
+            "https://sf-static.upanhlaylink.com/img/image_20260814057c14967e97b48feb9471516c9aa30a.jpg",
+            "https://sf-static.upanhlaylink.com/img/image_20260814c86d477f17674c032e1a9ab75650efc6.jpg",
+            "https://sf-static.upanhlaylink.com/img/image_202608144db55efb9f302bc69b7d0e4a163fedec.jpg",
+            "https://sf-static.upanhlaylink.com/img/image_20260814c388deb0bef2d5e27f44f05bca064f03.jpg"
+        ];
+
+        const translations = {
+            en: {
+                navAbout: "Our Story",
+                navMenu: "Menu",
+                navIntro: "Highlights",
+                navContact: "Visit Us",
+                navReserve: "Reserve Now",
+                heroTitle: "Fresh Pizza Every Day",
+                subtitle1: "Experience authentic pizza crafted with passion.",
+                subtitle2: "We have a passion for authentic Italian pizza.",
+                subtitle3: "Open Monday to Sunday from 13:00 to 22:00.",
+                subtitle4: "Dedicated service with warm Hoi An hospitality.",
+                heroButton: "Explore Our Menu",
+                aboutTitle: "Our Story",
+                aboutText: "Welcome to DiDi Pizza, where we bring a slice of Italy to the heart of Hoi An. Our passion for authentic pizza is reflected in every dish we create. Using only the freshest local ingredients and traditional recipes, we promise a dining experience that is both delicious and unforgettable. Join us and taste the difference.",
+                menuTitle: "Our Menu",
+                menuSwipeHint: "Swipe to browse. Click on any image to zoom in full screen.",
+                zoomBadge: "Click to Zoom",
+                introTitle: "DiDi Pizza - Fresh Pizza Daily in the Heart",
+                introParagraph: "Are you looking for a great stop in the heart of Hoi An to enjoy true, fresh pizza every day? Do not miss DiDi Pizza, an impressive pizza sanctuary bringing a memorable wood-fired experience.",
+                adv1_title: "Fresh Daily Pizza",
+                introAdvantage1: "Thin, crispy dough fermented slowly, topped with carefully selected, fresh local ingredients.",
+                adv2_title: "Unique Delicate Flavor",
+                introAdvantage2: "Harmonious blend of rich mozzarella, San Marzano tomato sauce, and distinct chef seasonings.",
+                adv3_title: "Cozy Hoi An Space",
+                introAdvantage3: "Clean, romantic atmosphere with charming street views to soak in the tranquil Hoi An lifestyle.",
+                adv4_title: "Dedicated Service",
+                introAdvantage4: "Warm hospitality, fast serving times, and great value for an authentic Italian culinary journey.",
+                adv5_title: "Interactive Dough-Tossing Show",
+                introAdvantage5: "Watch Chef DiDi perform bakery techniques and throw pizza dough live right in front of your eyes before placing it into the 400°C stone oven!",
+                introDishesTitle: "Must-Try Specialties:",
+                introDish2: '"Best Sellers" such as Catch of the Day, 4 Seasons, Margherita, BBQ Chicken, and Diavola.',
+                contactTitle: "Visit Us",
+                contactInfoTitle: "Information",
+                contactAddress1_lbl: "Branch 1:",
+                contactAddress2_lbl: "Branch 2:",
+                contactMapsTitle: "Our Locations on Map",
+                footerText: "© 2026 DiDi Pizza. All Rights Reserved."
+            },
+            vi: {
+                navAbout: "Câu Chuyện",
+                navMenu: "Thực Đơn",
+                navIntro: "Điểm Nổi Bật",
+                navContact: "Địa Chỉ",
+                navReserve: "Đặt Bàn Ngay",
+                heroTitle: "Pizza Tươi Mỗi Ngày",
+                subtitle1: "Trải nghiệm pizza Ý đích thực được tạo nên từ đam mê.",
+                subtitle2: "Chúng tôi mang cả tình yêu và nghệ thuật vào từng chiếc bánh.",
+                subtitle3: "Mở cửa từ Thứ Hai đến Chủ Nhật (13:00 - 22:00).",
+                subtitle4: "Dịch vụ tận tâm, thân thiện và chu đáo.",
+                heroButton: "Khám Phá Menu",
+                aboutTitle: "Câu Chuyện Của Chúng Tôi",
+                aboutText: "Chào mừng bạn đến với DiDi Pizza, nơi chúng tôi mang hương vị ẩm thực Ý chuẩn vị về giữa lòng phố cổ Hội An. Sử dụng nguồn nguyên liệu tươi ngon chọn lọc tại địa phương cùng công thức nướng củi truyền thống, chúng tôi cam kết đem lại trải nghiệm ẩm thực khó quên.",
+                menuTitle: "Thực Đơn Quán",
+                menuSwipeHint: "Vuốt để xem trang. Nhấp vào ảnh bất kỳ để phóng to toàn màn hình.",
+                zoomBadge: "Bấm Để Phóng To",
+                introTitle: "DiDi Pizza - Pizza Tươi Mỗi Ngày Giữa Lòng Phố Cổ",
+                introParagraph: "Bạn đang tìm kiếm điểm dừng chân lý tưởng tại Hội An để thưởng thức pizza tươi nóng giòn mỗi ngày? Đừng bỏ lỡ DiDi Pizza - tiệm pizza ấm cúng mang lại trải nghiệm chuẩn vị Ý.",
+                adv1_title: "Pizza Tươi Mới Mỗi Ngày",
+                introAdvantage1: "Đế bánh ủ men chậm mỏng giòn, nguyên liệu tươi được tuyển chọn kỹ lưỡng mỗi ngày.",
+                adv2_title: "Hương Vị Tinh Tế & Độc Đáo",
+                introAdvantage2: "Topping hảo hạng, sốt cà chua tươi đậm đà hòa quyện phô mai Mozzarella béo ngậy.",
+                adv3_title: "Không Gian Ấm Cúng & Gần Gũi",
+                introAdvantage3: "Không gian sạch sẽ, trang nhã, có góc nhìn ngắm phố phường Hội An thanh bình.",
+                adv4_title: "Dịch Vụ Nhanh Chóng & Tận Tâm",
+                introAdvantage4: "Nhân viên thân thiện, lên món nhanh, giá cả cực kỳ hợp lý.",
+                adv5_title: "Trải Nghiệm Mãn Nhãn Cùng Đầu Bếp",
+                introAdvantage5: "Bạn có thể tận mắt chiêm ngưỡng màn biểu diễn tung bột pizza nghệ thuật điêu luyện của đầu bếp DiDi trước khi nướng vào lò đá 400°C!",
+                introDishesTitle: "Các Món Nên Thử:",
+                introDish2: 'Các món "Best Seller" như Catch of the Day, 4 Seasons, Margherita, BBQ Chicken và Diavola.',
+                contactTitle: "Ghé Thăm Chúng Tôi",
+                contactInfoTitle: "Thông Tin Liên Hệ",
+                contactAddress1_lbl: "Cơ sở 1:",
+                contactAddress2_lbl: "Cơ sở 2:",
+                contactMapsTitle: "Vị Trí Của Chúng Tôi Trên Bản Đồ",
+                footerText: "© 2026 DiDi Pizza. Bảo lưu mọi quyền."
+            }
+        };
+
+        let currentLang = 'en';
+
+        function changeLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            const btnEn = document.getElementById('lang-en');
+            const btnVi = document.getElementById('lang-vi');
+            if (lang === 'en') {
+                btnEn.className = "px-3 py-1.5 rounded-full bg-amber-500 text-black transition-all";
+                btnVi.className = "px-3 py-1.5 rounded-full text-neutral-400 hover:text-white transition-all";
+            } else {
+                btnVi.className = "px-3 py-1.5 rounded-full bg-amber-500 text-black transition-all";
+                btnEn.className = "px-3 py-1.5 rounded-full text-neutral-400 hover:text-white transition-all";
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        const heroSlides = document.querySelectorAll('.hero-slide');
+        let currentHeroSlide = 0;
+        const heroSubtitles = ['subtitle1', 'subtitle2', 'subtitle3', 'subtitle4'];
+        let currentSubIndex = 0;
+
+        setInterval(() => {
+            heroSlides[currentHeroSlide].classList.remove('active');
+            currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+            heroSlides[currentHeroSlide].classList.add('active');
+
+            currentSubIndex = (currentSubIndex + 1) % heroSubtitles.length;
+            const subEl = document.getElementById('hero-subtitle');
+            subEl.style.opacity = '0';
+            setTimeout(() => {
+                subEl.setAttribute('data-key', heroSubtitles[currentSubIndex]);
+                subEl.innerHTML = translations[currentLang][heroSubtitles[currentSubIndex]];
+                subEl.style.opacity = '1';
+            }, 300);
+        }, 4500);
+
+        let currentMenuPage = 0;
+        const menuTrack = document.getElementById('menu-viewer-track');
+        const menuWrapper = document.getElementById('menu-viewer-wrapper');
+        const menuDots = document.getElementById('menu-dots');
+        const pageCounter = document.getElementById('page-counter');
+        const totalMenuPages = menuTrack.children.length;
+
+        function initMenuDots() {
+            menuDots.innerHTML = '';
+            for (let i = 0; i < totalMenuPages; i++) {
+                const dot = document.createElement('button');
+                dot.className = `w-2 h-2 rounded-full transition-all duration-300 ${i === currentMenuPage ? 'bg-amber-500 w-5' : 'bg-neutral-700'}`;
+                dot.onclick = () => goToMenuPage(i);
+                menuDots.appendChild(dot);
+            }
+        }
+
+        function updateMenuSlider() {
+            menuTrack.style.transform = `translateX(-${currentMenuPage * 100}%)`;
+            pageCounter.innerText = `Page ${currentMenuPage + 1} of ${totalMenuPages}`;
+            initMenuDots();
+        }
+
+        function nextMenuPage() {
+            currentMenuPage = (currentMenuPage + 1) % totalMenuPages;
+            updateMenuSlider();
+        }
+
+        function prevMenuPage() {
+            currentMenuPage = (currentMenuPage - 1 + totalMenuPages) % totalMenuPages;
+            updateMenuSlider();
+        }
+
+        function goToMenuPage(idx) {
+            currentMenuPage = idx;
+            updateMenuSlider();
+        }
+
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCounter = document.getElementById('lightbox-page-counter');
+
+        function openLightbox(index) {
+            currentMenuPage = index;
+            syncLightbox();
+            lightboxModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function syncLightbox() {
+            lightboxImg.src = menuImages[currentMenuPage];
+            if (currentMenuPage === 11) {
+                lightboxImg.classList.add('rotate-fix');
+            } else {
+                lightboxImg.classList.remove('rotate-fix');
+            }
+            lightboxCounter.innerText = `Page ${currentMenuPage + 1} / ${totalMenuPages}`;
+            updateMenuSlider();
+        }
+
+        function closeLightboxDirect() {
+            lightboxModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function closeLightbox(event) {
+            if (event.target === lightboxModal) {
+                closeLightboxDirect();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightboxModal.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightboxDirect();
+            if (e.key === 'ArrowRight') { nextMenuPage(); syncLightbox(); }
+            if (e.key === 'ArrowLeft') { prevMenuPage(); syncLightbox(); }
+        });
+
+        let startTouchX = 0;
+        let isDragging = false;
+        let dragDistance = 0;
+
+        menuWrapper.addEventListener('touchstart', (e) => {
+            startTouchX = e.touches[0].clientX;
+            dragDistance = 0;
+        }, { passive: true });
+
+        menuWrapper.addEventListener('touchmove', (e) => {
+            dragDistance = Math.abs(e.touches[0].clientX - startTouchX);
+        }, { passive: true });
+
+        menuWrapper.addEventListener('touchend', (e) => {
+            const endTouchX = e.changedTouches[0].clientX;
+            const diff = startTouchX - endTouchX;
+            if (Math.abs(diff) > 40) {
+                if (diff > 0) nextMenuPage();
+                else prevMenuPage();
+            }
+        }, { passive: true });
+
+        menuWrapper.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startTouchX = e.clientX;
+            dragDistance = 0;
+        });
+
+        menuWrapper.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            dragDistance = Math.abs(e.clientX - startTouchX);
+        });
+
+        menuWrapper.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            const diff = startTouchX - e.clientX;
+            if (Math.abs(diff) > 40) {
+                if (diff > 0) nextMenuPage();
+                else prevMenuPage();
+            }
+        });
+
+        function handleImageClick(index) {
+            if (dragDistance < 10) {
+                openLightbox(index);
+            }
+        }
+
+        initMenuDots();
+    </script>
 </body>
 </html>
